@@ -3,6 +3,6 @@
 -- WHERE 	조건에 맞는 데이터만 추출 -> 조건
 -- ORDER BY 정렬 기준(ASC, DESC)
 SELECT ANIMAL_ID
-From ANIMAL_INS
-Where NAME is not null
-order by ANIMAL_ID asc
+FROM ANIMAL_INS
+Where NAME IS NOT NULL
+ORDER BY ANIMAL_ID ASC
