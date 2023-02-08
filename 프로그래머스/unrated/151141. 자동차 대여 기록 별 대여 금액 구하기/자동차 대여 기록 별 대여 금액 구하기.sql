@@ -5,14 +5,6 @@
 # CAR_RENTAL_COMPANY_DISCOUNT_PLAN
 # PK : plan_id
 
-# CAR_RENTAL_COMPANY_CAR 테이블과 CAR_RENTAL_COMPANY_RENTAL_HISTORY 테이블과 CAR_RENTAL_COMPANY_DISCOUNT_PLAN 테이블에서 
-# 자동차 종류가 '트럭'인 자동차의 
-# 대여 기록에 대해서 
-# 대여 기록 별로 
-# 대여 금액(컬럼명: FEE)을 구하여 
-# 대여 기록 ID와 대여 금액 리스트를 출력.
-# 결과는 대여 금액을 기준으로 내림차순 정렬하고, 대여 금액이 같은 경우 대여 기록 ID를 기준으로 내림차순 정렬해주세요.
-
 # SELECT *
 # FROM CAR_RENTAL_COMPANY_CAR A JOIN CAR_RENTAL_COMPANY_RENTAL_HISTORY B ON A.CAR_ID = B.CAR_ID
 # WHERE CAR_TYPE = "트럭"
@@ -52,12 +44,21 @@
 
 SELECT HISTORY_ID, ROUND(대여기간 * 할인적용,0) AS FEE
 FROM (
-SELECT HISTORY_ID, DAILY_FEE - (DAILY_FEE * 할인율) AS 할인적용, 대여기간
+SELECT HISTORY_ID, DAILY_FEE - (DAILY_FEE * (할인율/100)) AS 할인적용, 대여기간
 FROM (
 SELECT HISTORY_ID, DAILY_FEE, 대여기간, 
-    CASE WHEN 구분 = '90일 이상' THEN 0.15
-    WHEN 구분 = '30일 이상' THEN 0.08
-    WHEN 구분 = '7일 이상' THEN 0.05
+    CASE WHEN 구분 = '90일 이상' THEN (SELECT DISCOUNT_RATE
+                                     FROM CAR_RENTAL_COMPANY_DISCOUNT_PLAN
+                                     WHERE CAR_TYPE = "트럭"
+                                     AND DURATION_TYPE = "90일 이상")
+    WHEN 구분 = '30일 이상' THEN (SELECT DISCOUNT_RATE
+                                     FROM CAR_RENTAL_COMPANY_DISCOUNT_PLAN
+                                     WHERE CAR_TYPE = "트럭"
+                                     AND DURATION_TYPE = "30일 이상")
+    WHEN 구분 = '7일 이상' THEN (SELECT DISCOUNT_RATE
+                                     FROM CAR_RENTAL_COMPANY_DISCOUNT_PLAN
+                                     WHERE CAR_TYPE = "트럭"
+                                     AND DURATION_TYPE = "7일 이상")
     ELSE 0.00 END AS '할인율'
 FROM (
 SELECT HISTORY_ID, DAILY_FEE, 대여기간,
@@ -71,5 +72,3 @@ FROM CAR_RENTAL_COMPANY_CAR A JOIN CAR_RENTAL_COMPANY_RENTAL_HISTORY B ON A.CAR_
 WHERE CAR_TYPE = "트럭"
     ) TBL_1 ) TBL_2 ) TBL_3 ) TBL_4
 ORDER BY FEE DESC, HISTORY_ID DESC;
-
-                                     
