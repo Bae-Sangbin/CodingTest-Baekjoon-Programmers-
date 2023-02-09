@@ -35,7 +35,7 @@
 # SELECT HISTORY_ID, DAILY_FEE, RENTAL_PERIOD,
 #     CASE WHEN RENTAL_PERIOD >= 90 THEN '90일 이상'
 #          WHEN RENTAL_PERIOD >= 30 THEN '30일 이상'
-#          WHEN RENTAL_PERIOD >= 7 THEN '7일 이상'
+#          WHEN RENTAL_PERIOD >=  7 THEN  '7일 이상'
 #     ELSE '7일 미만' END AS '구분'
 # FROM(TBL_1)
 
