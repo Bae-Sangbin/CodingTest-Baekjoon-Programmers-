@@ -1,11 +1,12 @@
 # DESC 테이블명으로 기본키와 외래키를 찾는다.
 
 # CAR_RENTAL_COMPANY_CAR
-# PK : car_id
+# PK : CAR_ID
 # CAR_RENTAL_COMPANY_RENTAL_HISTORY
-# PK : history_id
+# PK : HISTORY_ID
+# FK : CAR_ID
 # CAR_RENTAL_COMPANY_DISCOUNT_PLAN
-# PK : plan_id
+# PK : PLAN_ID
 
 # 풀이과정
 
