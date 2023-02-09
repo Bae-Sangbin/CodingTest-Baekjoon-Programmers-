@@ -12,7 +12,7 @@
 # 문제 풀이 방식은 서브쿼리입니다.
 # FROM절의 서브쿼리(인라인 뷰)가 여러 개 중첩된 형태로 이해하시면 됩니다.
 
-# ① 인라인 뷰 : TBL_1 테이블 만들기
+# ⓵ 인라인 뷰 : TBL_1 테이블 만들기
 # SELECT 
 #     A.CAR_ID, 
 #     DAILY_FEE, 
@@ -29,7 +29,7 @@
 # 자동차 종류가 '트럭'인 자동차만을 WHERE 조건으로 FILTERING 작업한 TBL_1 테이블을 만듭니다.
 # TBL_1이라는 테이블에서 자동차 대여 기간을 의미하는 'RENTAL_PERIOD'도 만듭니다.
 
-# ② 인라인 뷰 : TBL_2 테이블 만들기
+# ⓶ 인라인 뷰 : TBL_2 테이블 만들기
 
 # SELECT HISTORY_ID, DAILY_FEE, RENTAL_PERIOD,
 #     CASE WHEN RENTAL_PERIOD >= 90 THEN '90일 이상'
@@ -43,7 +43,7 @@
 # '90일 이상', '30일 이상', '7일 이상', '7일 미만'으로 구분짓습니다.
 # 이 작업을 하는 이유는 같은 CAR_TYPE이라도 기간의 구간대별로 대여할인율이 달라집니다.
 
-# ③ 인라인 뷰 : TBL_3 테이블 만들기
+# ⓷ 인라인 뷰 : TBL_3 테이블 만들기
 
 # SELECT 
 #     HISTORY_ID, 
@@ -67,7 +67,7 @@
 # CAR_RENTAL_COMPANY_DISCOUNT_PLAN라는 데이터베이스에 저장된 정보 중
 # 조건(기간의 구간대별로)에 맞게 할인율을 의미하는 'DISCOUNT_RATE'를 서브쿼리를 통해 가져옵니다. 
 
-# ④ 인라인 뷰 : TBL_4 테이블 만들기
+# ⓸ 인라인 뷰 : TBL_4 테이블 만들기
 
 # SELECT 
 #     HISTORY_ID, 
@@ -77,7 +77,7 @@
 
 # 일일 대여 금액(DAILY_FEE)에 할인 적용해서 할인된 새로운 요금을 각행마다 구합니다.
 
-# ⑤ 메인 쿼리
+# ⓹ 메인 쿼리
 
 # SELECT 
 #     HISTORY_ID, 
@@ -86,7 +86,7 @@
 
 # (대여기간 * 할인된 일일 대여 요금)으로 최종 대여금액(FEE)를 구합니다.
 
-# ⑥ 정렬
+# ⓺ 정렬
 
 # ORDER BY 
 #     FEE DESC, HISTORY_ID DESC;
