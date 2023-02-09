@@ -38,7 +38,7 @@
 #     ELSE '7일 미만' END AS '구분'
 # FROM(TBL_1)
 
-# TBL_1 테이블을 전체를 감싸고 있는 바깥쪽 쿼리인 TBL_2 테이블을 만듭니다.
+# TBL_1 테이블을 FROM절로 사용하는 TBL_2 테이블을 만듭니다.
 # TBL_2에서는 TBL_1에서 파생적으로 만든 'RENTAL_PERIOD'에 따라서 
 # '90일 이상', '30일 이상', '7일 이상', '7일 미만'으로 구분짓습니다.
 # 이 작업을 하는 이유는 같은 CAR_TYPE이라도 기간의 구간대별로 대여할인율이 달라집니다.
@@ -64,6 +64,7 @@
 #     ELSE 0.00 END AS 'DC_RATE'
 # FROM(TBL_2)
 
+# TBL_2 테이블을 FROM절로 사용하는 TBL_3 테이블을 만듭니다.
 # CAR_RENTAL_COMPANY_DISCOUNT_PLAN라는 데이터베이스에 저장된 정보 중
 # 조건(기간의 구간대별로)에 맞게 할인율을 의미하는 'DISCOUNT_RATE'를 서브쿼리를 통해 가져옵니다. 
 
@@ -75,6 +76,7 @@
 #     RENTAL_PERIOD
 # FROM (TBL_3)
 
+# TBL_3 테이블을 FROM절로 사용하는 TBL_4 테이블을 만듭니다.
 # 일일 대여 금액(DAILY_FEE)에 할인 적용해서 할인된 새로운 요금을 각행마다 구합니다.
 
 # ⓹ 메인 쿼리
@@ -84,6 +86,7 @@
 #     ROUND(RENTAL_PERIOD * DISCOUNT_FEE,0) AS FEE
 # FROM (TBL_4)
 
+# TBL_4 테이블을 FROM절로 사용하는 최종 메인쿼리를 작성합니다.
 # (대여기간 * 할인된 일일 대여 요금)으로 최종 대여금액(FEE)를 구합니다.
 
 # ⓺ 정렬
