@@ -150,8 +150,7 @@
  #     ON A.CAR_ID = B.CAR_ID
  # WHERE CAR_TYPE = "트럭"
  #     ) TBL_1 ) TBL_2 ) TBL_3 ) TBL_4
- # ORDER BY 
- #     FEE DESC, HISTORY_ID DESC;
+ # ORDER BY FEE DESC, HISTORY_ID DESC;
 
 
 #최종 완성된 쿼리(버전 2)
