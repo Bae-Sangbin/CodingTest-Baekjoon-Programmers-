@@ -37,7 +37,7 @@
 #          WHEN RENTAL_PERIOD >= 30 THEN '30일 이상'
 #          WHEN RENTAL_PERIOD >=  7 THEN  '7일 이상'
 #     ELSE '7일 미만' END AS '구분'
-# FROM(TBL_1)
+# FROM TBL_1
 
 # TBL_1 테이블을 FROM절로 사용하는 TBL_2 테이블을 만듭니다.
 # TBL_2에서는 TBL_1에서 파생적으로 만든 'RENTAL_PERIOD'에 따라서 
@@ -63,7 +63,7 @@
 #                                      WHERE CAR_TYPE = "트럭"
 #                                      AND DURATION_TYPE = "7일 이상")
 #     ELSE 0.00 END AS 'DC_RATE'
-# FROM(TBL_2)
+# FROM TBL_2
 
 # TBL_2 테이블을 FROM절로 사용하는 TBL_3 테이블을 만듭니다.
 # CAR_RENTAL_COMPANY_DISCOUNT_PLAN라는 데이터베이스에 저장된 정보 중
@@ -75,7 +75,7 @@
 #     HISTORY_ID, 
 #     DAILY_FEE - (DAILY_FEE * (DC_RATE/100)) AS DISCOUNT_FEE, 
 #     RENTAL_PERIOD
-# FROM (TBL_3)
+# FROM TBL_3
 
 # TBL_3 테이블을 FROM절로 사용하는 TBL_4 테이블을 만듭니다.
 # 일일 대여 금액(DAILY_FEE)에 할인 적용해서 할인된 새로운 요금을 각행마다 구합니다.
@@ -85,7 +85,7 @@
 # SELECT 
 #     HISTORY_ID, 
 #     ROUND(RENTAL_PERIOD * DISCOUNT_FEE,0) AS FEE
-# FROM (TBL_4)
+# FROM TBL_4
 
 # TBL_4 테이블을 FROM절로 사용하는 최종 메인쿼리를 작성합니다.
 # (대여기간 * 할인된 일일 대여 요금)으로 최종 대여금액(FEE)를 구합니다.
@@ -100,16 +100,77 @@
 
 
 #최종 완성된 쿼리
+# SELECT 
+#     HISTORY_ID, 
+#     ROUND(RENTAL_PERIOD * DISCOUNT_FEE,0) AS FEE
+# FROM (
+# SELECT 
+#     HISTORY_ID, 
+#     DAILY_FEE - (DAILY_FEE * (DC_RATE/100)) AS DISCOUNT_FEE, 
+#     RENTAL_PERIOD
+# FROM (
+# SELECT 
+#     HISTORY_ID, 
+#     DAILY_FEE, 
+#     RENTAL_PERIOD, 
+#     CASE WHEN 구분 = '90일 이상' THEN (SELECT DISCOUNT_RATE
+#                                      FROM CAR_RENTAL_COMPANY_DISCOUNT_PLAN
+#                                      WHERE CAR_TYPE = "트럭"
+#                                      AND DURATION_TYPE = "90일 이상")
+#     WHEN 구분 = '30일 이상' THEN (SELECT DISCOUNT_RATE
+#                                      FROM CAR_RENTAL_COMPANY_DISCOUNT_PLAN
+#                                      WHERE CAR_TYPE = "트럭"
+#                                      AND DURATION_TYPE = "30일 이상")
+#     WHEN 구분 = '7일 이상' THEN (SELECT DISCOUNT_RATE
+#                                      FROM CAR_RENTAL_COMPANY_DISCOUNT_PLAN
+#                                      WHERE CAR_TYPE = "트럭"
+#                                      AND DURATION_TYPE = "7일 이상")
+#     ELSE 0.00 END AS 'DC_RATE'
+# FROM (
+# SELECT HISTORY_ID, DAILY_FEE, RENTAL_PERIOD,
+#     CASE WHEN RENTAL_PERIOD >= 90 THEN '90일 이상'
+#          WHEN RENTAL_PERIOD >= 30 THEN '30일 이상'
+#          WHEN RENTAL_PERIOD >= 7 THEN '7일 이상'
+#     ELSE '7일 미만' END AS '구분'
+# FROM(
+# SELECT 
+#     A.CAR_ID, 
+#     DAILY_FEE, 
+#     HISTORY_ID, 
+#     START_DATE, 
+#     END_DATE, 
+#     DATEDIFF(END_DATE,START_DATE)+1 AS 'RENTAL_PERIOD'
+# FROM CAR_RENTAL_COMPANY_CAR A JOIN CAR_RENTAL_COMPANY_RENTAL_HISTORY B 
+#     ON A.CAR_ID = B.CAR_ID
+# WHERE CAR_TYPE = "트럭"
+#     ) TBL_1 ) TBL_2 ) TBL_3 ) TBL_4
+# ORDER BY 
+#     FEE DESC, HISTORY_ID DESC;
+
+
+
+WITH TBL_1 AS(
 SELECT 
+    A.CAR_ID, 
+    DAILY_FEE, 
     HISTORY_ID, 
-    ROUND(RENTAL_PERIOD * DISCOUNT_FEE,0) AS FEE
-FROM (
-SELECT 
-    HISTORY_ID, 
-    DAILY_FEE - (DAILY_FEE * (DC_RATE/100)) AS DISCOUNT_FEE, 
-    RENTAL_PERIOD
-FROM (
-SELECT 
+    START_DATE, 
+    END_DATE, 
+    DATEDIFF(END_DATE,START_DATE)+1 AS 'RENTAL_PERIOD'
+FROM CAR_RENTAL_COMPANY_CAR A JOIN CAR_RENTAL_COMPANY_RENTAL_HISTORY B 
+    ON A.CAR_ID = B.CAR_ID
+WHERE CAR_TYPE = "트럭"
+    ),
+TBL_2 AS (
+    SELECT HISTORY_ID, DAILY_FEE, RENTAL_PERIOD,
+    CASE WHEN RENTAL_PERIOD >= 90 THEN '90일 이상'
+         WHEN RENTAL_PERIOD >= 30 THEN '30일 이상'
+         WHEN RENTAL_PERIOD >=  7 THEN  '7일 이상'
+    ELSE '7일 미만' END AS '구분'
+FROM TBL_1
+    ),
+TBL_3 AS (
+    SELECT 
     HISTORY_ID, 
     DAILY_FEE, 
     RENTAL_PERIOD, 
@@ -126,23 +187,21 @@ SELECT
                                      WHERE CAR_TYPE = "트럭"
                                      AND DURATION_TYPE = "7일 이상")
     ELSE 0.00 END AS 'DC_RATE'
-FROM (
-SELECT HISTORY_ID, DAILY_FEE, RENTAL_PERIOD,
-    CASE WHEN RENTAL_PERIOD >= 90 THEN '90일 이상'
-         WHEN RENTAL_PERIOD >= 30 THEN '30일 이상'
-         WHEN RENTAL_PERIOD >= 7 THEN '7일 이상'
-    ELSE '7일 미만' END AS '구분'
-FROM(
+FROM TBL_2
+    ),
+TBL_4 AS (
+    SELECT 
+        HISTORY_ID, 
+        DAILY_FEE - (DAILY_FEE * (DC_RATE/100)) AS DISCOUNT_FEE, 
+        RENTAL_PERIOD
+    FROM TBL_3
+)
+
 SELECT 
-    A.CAR_ID, 
-    DAILY_FEE, 
     HISTORY_ID, 
-    START_DATE, 
-    END_DATE, 
-    DATEDIFF(END_DATE,START_DATE)+1 AS 'RENTAL_PERIOD'
-FROM CAR_RENTAL_COMPANY_CAR A JOIN CAR_RENTAL_COMPANY_RENTAL_HISTORY B 
-    ON A.CAR_ID = B.CAR_ID
-WHERE CAR_TYPE = "트럭"
-    ) TBL_1 ) TBL_2 ) TBL_3 ) TBL_4
+    ROUND(RENTAL_PERIOD * DISCOUNT_FEE,0) AS FEE
+FROM TBL_4
 ORDER BY 
     FEE DESC, HISTORY_ID DESC;
+
+
