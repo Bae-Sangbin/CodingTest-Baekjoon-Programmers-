@@ -99,7 +99,7 @@
 # 대여 금액이 같은 경우 대여 기록 ID를 기준으로 내림차순 정렬합니다.
 
 
-#최종 완성된 쿼리
+#최종 완성된 쿼리(버전 1)
 # SELECT 
 #     HISTORY_ID, 
 #     ROUND(RENTAL_PERIOD * DISCOUNT_FEE,0) AS FEE
@@ -148,7 +148,7 @@
 #     FEE DESC, HISTORY_ID DESC;
 
 
-
+#최종 완성된 쿼리(버전 2)
 WITH TBL_1 AS(
 SELECT 
     A.CAR_ID, 
@@ -203,5 +203,3 @@ SELECT
 FROM TBL_4
 ORDER BY 
     FEE DESC, HISTORY_ID DESC;
-
-
