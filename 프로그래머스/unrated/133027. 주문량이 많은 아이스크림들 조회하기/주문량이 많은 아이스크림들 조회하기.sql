@@ -8,11 +8,11 @@
 # 1대다 관계가 됩니다. 다 쪽에 있는 키가 외래키, 1 쪽에 있는 키가 기본키가 됩니다.
 
 
-# SELECT J.FLAVOR
-# FROM FIRST_HALF F JOIN JULY J ON F.SHIPMENT_ID = J.SHIPMENT_ID
-# GROUP BY J.FLAVOR
-# ORDER BY F.TOTAL_ORDER + SUM(J.TOTAL_ORDER) DESC
-# LIMIT 3
+SELECT J.FLAVOR
+FROM FIRST_HALF F RIGHT JOIN JULY J ON F.SHIPMENT_ID = J.SHIPMENT_ID
+GROUP BY J.FLAVOR
+ORDER BY SUM(F.TOTAL_ORDER)+SUM(J.TOTAL_ORDER) DESC
+LIMIT 3
 
 # SELECT F_HALF.FLAVOR
 # FROM FIRST_HALF F_HALF JOIN 
@@ -23,12 +23,6 @@
 # ON F_HALF.FLAVOR = JULY_SUM.FLAVOR
 # ORDER BY (F_HALF.TOTAL_ORDER + JULY_SUM.SUM_ORDER) DESC LIMIT 3
 
-select j.flavor
-from
-(SELECT flavor, sum(total_order) as total
-from july 
-group by flavor) j join
-(SELECT flavor, sum(total_order) as total
-from FIRST_HALF 
-group by flavor) fh on j.flavor = fh.flavor
-order by fh.TOTAL + j.TOTAL DESC limit 3
+# SELECT SHIPMENT_ID, COUNT(*) AS CNT
+# FROM JULY
+# GROUP BY SHIPMENT_ID
