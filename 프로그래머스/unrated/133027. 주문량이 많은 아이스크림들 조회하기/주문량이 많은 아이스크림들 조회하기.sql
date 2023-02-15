@@ -8,6 +8,7 @@
 # 1대다 관계가 됩니다. 다 쪽에 있는 키가 외래키, 1 쪽에 있는 키가 기본키가 됩니다.
 
 
+
 SELECT J.FLAVOR
 FROM FIRST_HALF F RIGHT JOIN JULY J ON F.SHIPMENT_ID = J.SHIPMENT_ID
 GROUP BY J.FLAVOR
