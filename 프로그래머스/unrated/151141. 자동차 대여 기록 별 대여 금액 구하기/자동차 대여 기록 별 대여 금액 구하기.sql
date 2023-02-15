@@ -172,7 +172,12 @@
 
 # --------------------------------------------------------------------------------
 
+# CAR_RENTAL_COMPANY_CAR 테이블과 CAR_RENTAL_COMPANY_RENTAL_HISTORY 테이블과 CAR_RENTAL_COMPANY_DISCOUNT_PLAN 테이블에서 
+# 자동차 종류가 '트럭'인 자동차의 
+# 대여 기록에 대해서 대여 기록 별로 대여 금액(컬럼명: FEE)을 구하여 대여 기록 ID와 대여 금액 리스트를 출력하는 SQL문을 작성해주세요. 
+# 결과는 대여 금액을 기준으로 내림차순 정렬하고, 대여 금액이 같은 경우 대여 기록 ID를 기준으로 내림차순 정렬해주세요.
 # 최종 완성된 쿼리(버전 2)
+
 WITH TBL_1 AS(
 SELECT
     HISTORY_ID, 
@@ -181,7 +186,7 @@ SELECT
 FROM (SELECT *
       FROM CAR_RENTAL_COMPANY_CAR
       WHERE CAR_TYPE = "트럭") A JOIN CAR_RENTAL_COMPANY_RENTAL_HISTORY B 
-    ON A.CAR_ID = B.CAR_ID
+      ON A.CAR_ID = B.CAR_ID
     ),
 TBL_2 AS (
 SELECT HISTORY_ID, DAILY_FEE, RENTAL_PERIOD,
@@ -211,7 +216,7 @@ SELECT
           FROM CAR_RENTAL_COMPANY_DISCOUNT_PLAN
           WHERE CAR_TYPE = "트럭"
           AND DURATION_TYPE = "7일 이상")
-    ELSE 0.00 END AS 'DC_RATE'
+    ELSE 0 END AS 'DC_RATE'
 FROM TBL_2
     ),
 TBL_4 AS (
@@ -227,3 +232,4 @@ SELECT
     ROUND(RENTAL_PERIOD * DISCOUNT_FEE,0) AS FEE
 FROM TBL_4
 ORDER BY FEE DESC, HISTORY_ID DESC;
+
