@@ -1,10 +1,12 @@
-data_1 = int(input())
-data_2 = int(input())
-if (data_1 > 0 and data_2 > 0) :
-    print('1')
-elif (data_1 < 0 and data_2 > 0) :
-    print('2')
-elif (data_1 < 0 and data_2 < 0) :
-    print('3')
-else :
-    print('4')
+a = int(input())
+b = int(input())
+if a>0:
+    if b>0:
+        print(1)
+    else:
+        print(4)
+else:
+    if b>0:
+        print(2)
+    else:
+        print(3)
