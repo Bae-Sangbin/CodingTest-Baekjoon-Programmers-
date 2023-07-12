@@ -1,3 +1,2 @@
-A= input()
-str = "??!"
-print(A+str)
+s = input()
+print(s+"??!")
