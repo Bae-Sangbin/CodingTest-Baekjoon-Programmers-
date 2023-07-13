@@ -1,8 +1,4 @@
 T = int(input())
-
-n = 1
-
-for _ in range(T) :
-    A, B = map(int, input().split(' '))
-    print("Case #{}: {} + {} = {}".format(n,A,B,A+B))
-    n+=1
+for i in range(1,T+1):
+    a, b = map(int, input().split())
+    print(f'Case #{i}: {a} + {b} = {a+b}')
