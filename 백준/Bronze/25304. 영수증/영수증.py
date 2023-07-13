@@ -1,10 +1,11 @@
-total_amount = int(input())
-times = int(input())
-
-for i in range(times) :
-    amount, units = input().split()
-    amount, units = int(amount), int(units)
+X = int(input())
+N = int(input())
+sum = 0
+for i in range(N):
+    a, b = map(int, input().split())
+    sum += (a*b)
+if X == sum :
+    print("Yes")
+else :
+    print("No")
     
-    total_amount -= (amount * units)
-    
-print("Yes" if total_amount == 0 else "No")
