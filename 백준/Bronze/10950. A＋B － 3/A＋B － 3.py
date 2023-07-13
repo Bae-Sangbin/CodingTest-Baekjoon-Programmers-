@@ -1,8 +1,4 @@
-n = int(input())
-
-for _ in range(n) :
-    input_data = input().split(' ')
-    A = int(input_data[0])
-    B = int(input_data[1])   
+T = int(input())
+for i in range(T):
+    A, B = map(int, input().split())
     print(A+B)
-    
