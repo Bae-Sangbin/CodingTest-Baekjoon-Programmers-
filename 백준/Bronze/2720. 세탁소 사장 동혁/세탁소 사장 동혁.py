@@ -1,13 +1,12 @@
 T = int(input())
-lst = list()
-for i in range(T):
-    lst.append(int(input()))
+data = list()
+for _ in range(T):
+    data.append(int(input()))
     
-q,d,n,p = [0]*4
-
-for i in range(T):
-    result = lst[i]
-    q+= result // 25
+q = d = n = p = 0
+for i in range(len(data)):
+    result = data[i]
+    q += result // 25
     result %= 25
     d += result // 10
     result %= 10
@@ -15,7 +14,5 @@ for i in range(T):
     result %= 5
     p += result // 1
     result %= 1
-    print(q, d, n, p)
-    q,d,n,p = [0]*4
-    
-
+    print(q,d,n,p)
+    q = d = n = p = 0
