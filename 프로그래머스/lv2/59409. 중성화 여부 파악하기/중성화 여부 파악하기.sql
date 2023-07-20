@@ -1,5 +1,7 @@
-SELECT ANIMAL_ID, NAME, IF(SEX_UPON_INTAKE LIKE '%Neutered%' or 
-                           SEX_UPON_INTAKE LIKE '%Spayed%','O','X') 
-                           AS '중성화여부'
+SELECT 
+    ANIMAL_ID,
+    NAME,
+    CASE WHEN REGEXP_LIKE(SEX_UPON_INTAKE, 'neutered|spayed', 'i') THEN 'O'
+    ELSE 'X' END AS 중성화
 FROM ANIMAL_INS
-ORDER BY ANIMAL_ID;
+ORDER BY ANIMAL_ID ASC;
