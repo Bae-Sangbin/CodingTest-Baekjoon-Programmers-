@@ -1,19 +1,19 @@
 -- 코드를 입력하세요
 SELECT
     CAR_ID,
-    CASE WHEN TOTAL_P = 0 THEN '대여 가능'
+    CASE WHEN TOTAL_AVAILBILITY = 0 THEN '대여 가능'
     ELSE '대여중' END AS AVAILABILITY
 FROM 
     (
     SELECT 
         CAR_ID, 
-        SUM(P) AS TOTAL_P
+        SUM(AVAILBILITY) AS TOTAL_AVAILBILITY
     FROM 
         (
         SELECT CAR_ID,
             CASE WHEN TO_DATE('2022-10-16', 'YYYY-MM-DD') 
                 BETWEEN START_DATE AND END_DATE THEN 1
-            ELSE 0 END AS P
+            ELSE 0 END AS AVAILBILITY
         FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
         )
     GROUP BY CAR_ID
