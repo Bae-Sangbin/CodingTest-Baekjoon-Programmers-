@@ -1,43 +1,13 @@
--- -- 코드를 입력하세요
--- SELECT 
---     M.MEMBER_NAME,
---     R.REVIEW_TEXT,
---     TO_CHAR(R.REVIEW_DATE, 'YYYY-MM-DD') AS REVIEW_DATE
--- FROM MEMBER_PROFILE M, REST_REVIEW R
--- WHERE M.MEMBER_ID = R.MEMBER_ID
--- AND M.MEMBER_ID IN (SELECT MEMBER_ID
---                      FROM REST_REVIEW
---                      GROUP BY MEMBER_ID
---                      ORDER BY COUNT(*) DESC
---                      FETCH FIRST 1 ROW ONLY)
--- ORDER BY 
---     REVIEW_DATE ASC, 
---     R.REVIEW_TEXT ASC;
-
--- 이렇게 풀면 정소율 한명 밖에 안나옴.
--- 즉 정답으로 나오지만 잘못된 결과를 반환
-
-SELECT DISTINCT 
+-- 코드를 입력하세요
+SELECT 
     M.MEMBER_NAME,
     R.REVIEW_TEXT,
-    TO_CHAR(RR.REVIEW_DATE, 'YYYY-MM-DD') AS REVIEW_DATE
-FROM (
-    SELECT R2.MEMBER_ID, R1.REVIEW_TEXT, R1.REVIEW_DATE
-    FROM REST_REVIEW R1,
-        (
-            SELECT
-                MEMBER_ID,
-                COUNT(REVIEW_ID),
-                RANK() OVER (ORDER BY COUNT(REVIEW_ID) DESC) AS RANK
-            FROM REST_REVIEW
-            GROUP BY MEMBER_ID
-        ) R2
-    WHERE R2.RANK = 1
-        AND R1.MEMBER_ID = R2.MEMBER_ID
-) R,
-    MEMBER_PROFILE M,
-    REST_REVIEW RR
-WHERE R.MEMBER_ID = M.MEMBER_ID
-    AND RR.REVIEW_DATE = R.REVIEW_DATE
-    AND R.MEMBER_ID = RR.MEMBER_ID
-ORDER BY review_date ASC, R.review_text ASC;
+    TO_CHAR(R.REVIEW_DATE, 'YYYY-MM-DD') AS REVIEW_DATE
+FROM MEMBER_PROFILE M, REST_REVIEW R
+WHERE M.MEMBER_ID = R.MEMBER_ID
+AND M.MEMBER_ID IN (SELECT MEMBER_ID
+                     FROM REST_REVIEW
+                     GROUP BY MEMBER_ID
+                     ORDER BY COUNT(*) DESC
+                     FETCH FIRST 1 ROW WITH TIES)
+ORDER BY REVIEW_DATE ASC, REVIEW_TEXT ASC;
