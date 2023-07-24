@@ -8,7 +8,7 @@
 
 ### 구분
 
-코딩테스트 연습 > 선택하다
+코딩테스트 연습 > SELECT
 
 ### 채점결과
 
@@ -19,35 +19,35 @@ Empty
 <p>다음은 어느 의류 쇼핑몰의 온라인 상품 판매 정보를 담은 <code>ONLINE_SALE</code> 테이블과 오프라인 상품 판매 정보를 담은 <code>OFFLINE_SALE</code> 테이블 입니다. <code>ONLINE_SALE</code> 테이블은 아래와 같은 구조로 되어있으며 <code>ONLINE_SALE_ID</code>, <code>USER_ID</code>, <code>PRODUCT_ID</code>, <code>SALES_AMOUNT</code>, <code>SALES_DATE</code>는 각각 온라인 상품 판매 ID, 회원 ID, 상품 ID, 판매량, 판매일을 나타냅니다.</p>
 <table class="table">
         <thead><tr>
-<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">열 이름</font></font></th>
-<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">유형</font></font></th>
-<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">널 입력 가능</font></font></th>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
 </tr>
 </thead>
         <tbody><tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ONLINE_SALE_ID</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">정수</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거짓</font></font></td>
+<td>ONLINE_SALE_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">USER_ID</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">정수</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거짓</font></font></td>
+<td>USER_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">제품 ID</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">정수</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거짓</font></font></td>
+<td>PRODUCT_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">판매량</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">정수</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거짓</font></font></td>
+<td>SALES_AMOUNT</td>
+<td>INTEGER</td>
+<td>FALSE</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SALES_DATE</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">날짜</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거짓</font></font></td>
+<td>SALES_DATE</td>
+<td>DATE</td>
+<td>FALSE</td>
 </tr>
 </tbody>
       </table>
@@ -56,30 +56,30 @@ Empty
 <p><code>OFFLINE_SALE</code> 테이블은 아래와 같은 구조로 되어있으며 <code>OFFLINE_SALE_ID</code>, <code>PRODUCT_ID</code>, <code>SALES_AMOUNT</code>, <code>SALES_DATE</code>는 각각 오프라인 상품 판매 ID, 상품 ID, 판매량, 판매일을 나타냅니다.</p>
 <table class="table">
         <thead><tr>
-<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">열 이름</font></font></th>
-<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">유형</font></font></th>
-<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">널 입력 가능</font></font></th>
+<th>Column name</th>
+<th>Type</th>
+<th>Nullable</th>
 </tr>
 </thead>
         <tbody><tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OFFLINE_SALE_ID</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">정수</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거짓</font></font></td>
+<td>OFFLINE_SALE_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">제품 ID</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">정수</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거짓</font></font></td>
+<td>PRODUCT_ID</td>
+<td>INTEGER</td>
+<td>FALSE</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">판매량</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">정수</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거짓</font></font></td>
+<td>SALES_AMOUNT</td>
+<td>INTEGER</td>
+<td>FALSE</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SALES_DATE</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">날짜</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">거짓</font></font></td>
+<td>SALES_DATE</td>
+<td>DATE</td>
+<td>FALSE</td>
 </tr>
 </tbody>
       </table>
@@ -98,53 +98,53 @@ Empty
 <p>예를 들어 <code>ONLINE_SALE</code> 테이블이 다음과 같고</p>
 <table class="table">
         <thead><tr>
-<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ONLINE_SALE_ID</font></font></th>
-<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">USER_ID</font></font></th>
-<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">제품 ID</font></font></th>
-<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">판매량</font></font></th>
-<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SALES_DATE</font></font></th>
+<th>ONLINE_SALE_ID</th>
+<th>USER_ID</th>
+<th>PRODUCT_ID</th>
+<th>SALES_AMOUNT</th>
+<th>SALES_DATE</th>
 </tr>
 </thead>
         <tbody><tr>
 <td>1</td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
+<td>1</td>
 <td>3</td>
 <td>2</td>
 <td>2022-02-25</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></td>
+<td>2</td>
 <td>4</td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
+<td>4</td>
+<td>1</td>
 <td>2022-03-01</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
 <td>2022-03-02</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></td>
+<td>3</td>
 <td>6</td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2022-03-02</font></font></td>
+<td>3</td>
+<td>3</td>
+<td>2022-03-02</td>
 </tr>
 <tr>
 <td>5</td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
+<td>5</td>
+<td>5</td>
+<td>1</td>
 <td>2022-03-03</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5</font></font></td>
+<td>6</td>
+<td>5</td>
 <td>7</td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
+<td>1</td>
 <td>2022-04-06</td>
 </tr>
 </tbody>
@@ -152,46 +152,46 @@ Empty
 <p><code>OFFLINE_SALE</code> 테이블이 다음과 같다면</p>
 <table class="table">
         <thead><tr>
-<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OFFLINE_SALE_ID</font></font></th>
-<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">제품 ID</font></font></th>
-<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">판매량</font></font></th>
-<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SALES_DATE</font></font></th>
+<th>OFFLINE_SALE_ID</th>
+<th>PRODUCT_ID</th>
+<th>SALES_AMOUNT</th>
+<th>SALES_DATE</th>
 </tr>
 </thead>
         <tbody><tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
 <td>2022-02-21</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2022-03-01</font></font></td>
+<td>4</td>
+<td>1</td>
+<td>2</td>
+<td>2022-03-01</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2022-03-01</font></font></td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>2022-03-01</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2022-03-01</font></font></td>
+<td>2</td>
+<td>4</td>
+<td>1</td>
+<td>2022-03-01</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2022-03-03</font></font></td>
+<td>5</td>
+<td>2</td>
+<td>1</td>
+<td>2022-03-03</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
+<td>6</td>
+<td>2</td>
+<td>1</td>
 <td>2022-04-01</td>
 </tr>
 </tbody>
@@ -199,59 +199,59 @@ Empty
 <p>각 테이블의 2022년 3월의 판매 데이터를 합쳐서, 정렬한 결과는 다음과 같아야 합니다.</p>
 <table class="table">
         <thead><tr>
-<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">SALES_DATE</font></font></th>
-<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">제품 ID</font></font></th>
-<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">USER_ID</font></font></th>
-<th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">판매량</font></font></th>
+<th>SALES_DATE</th>
+<th>PRODUCT_ID</th>
+<th>USER_ID</th>
+<th>SALES_AMOUNT</th>
 </tr>
 </thead>
         <tbody><tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2022-03-01</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">없는</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></td>
+<td>2022-03-01</td>
+<td>1</td>
+<td>NULL</td>
+<td>2</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2022-03-01</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">없는</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></td>
+<td>2022-03-01</td>
+<td>3</td>
+<td>NULL</td>
+<td>3</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2022-03-01</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">없는</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
+<td>2022-03-01</td>
+<td>4</td>
+<td>NULL</td>
+<td>1</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2022-03-01</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
+<td>2022-03-01</td>
+<td>4</td>
+<td>4</td>
+<td>1</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2022-03-02</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></td>
+<td>2022-03-02</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2022-03-02</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3</font></font></td>
+<td>2022-03-02</td>
+<td>3</td>
+<td>6</td>
+<td>3</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2022-03-03</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">없는</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
+<td>2022-03-03</td>
+<td>2</td>
+<td>NULL</td>
+<td>1</td>
 </tr>
 <tr>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2022-03-03</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5</font></font></td>
-<td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1</font></font></td>
+<td>2022-03-03</td>
+<td>5</td>
+<td>5</td>
+<td>1</td>
 </tr>
 </tbody>
       </table>
