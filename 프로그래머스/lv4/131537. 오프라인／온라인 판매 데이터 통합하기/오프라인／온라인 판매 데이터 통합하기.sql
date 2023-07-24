@@ -16,7 +16,7 @@ FROM
         SELECT
             SALES_DATE,
             PRODUCT_ID,
-            NULL,
+            NULL AS USER_ID,
             SALES_AMOUNT
         FROM OFFLINE_SALE
     )
