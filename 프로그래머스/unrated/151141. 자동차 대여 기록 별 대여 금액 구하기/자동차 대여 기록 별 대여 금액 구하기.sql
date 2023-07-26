@@ -40,21 +40,21 @@ FROM (
                 END AS D_TYPE
             FROM (
                 SELECT
-                    A.CAR_ID,
-                    DAILY_FEE,
-                    HISTORY_ID,
-                    START_DATE,
-                    END_DATE,
-                    ROUND(TRUNC(END_DATE) - TRUNC(START_DATE)) + 1 AS RENTAL_PERIOD
+                    C.CAR_ID,
+                    C.DAILY_FEE,
+                    H.HISTORY_ID,
+                    H.END_DATE - H.START_DATE + 1 AS RENTAL_PERIOD
                 FROM
-                    CAR_RENTAL_COMPANY_CAR A
-                    JOIN CAR_RENTAL_COMPANY_RENTAL_HISTORY B ON A.CAR_ID = B.CAR_ID
+                    CAR_RENTAL_COMPANY_CAR C,
+                    CAR_RENTAL_COMPANY_RENTAL_HISTORY H
                 WHERE
-                    CAR_TYPE = '트럭'
-            ) TBL_1
-        ) TBL_2
-    ) TBL_3
-) TBL_4
+                    C.CAR_ID = H.CAR_ID
+                AND
+                    C.CAR_TYPE = '트럭'
+                )
+            )
+        )
+    )
 ORDER BY
     FEE DESC,
     HISTORY_ID DESC;
