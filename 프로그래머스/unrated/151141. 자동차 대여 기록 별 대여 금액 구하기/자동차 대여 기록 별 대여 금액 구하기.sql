@@ -13,18 +13,18 @@ FROM (
             DAILY_FEE,
             RENTAL_PERIOD,
             CASE
-                WHEN 구분 = '90일 이상' THEN (SELECT DISCOUNT_RATE
-                                            FROM CAR_RENTAL_COMPANY_DISCOUNT_PLAN
-                                            WHERE CAR_TYPE = '트럭'
-                                              AND DURATION_TYPE = '90일 이상')
-                WHEN 구분 = '30일 이상' THEN (SELECT DISCOUNT_RATE
-                                            FROM CAR_RENTAL_COMPANY_DISCOUNT_PLAN
-                                            WHERE CAR_TYPE = '트럭'
-                                              AND DURATION_TYPE = '30일 이상')
-                WHEN 구분 = '7일 이상' THEN (SELECT DISCOUNT_RATE
-                                           FROM CAR_RENTAL_COMPANY_DISCOUNT_PLAN
-                                           WHERE CAR_TYPE = '트럭'
-                                             AND DURATION_TYPE = '7일 이상')
+                WHEN D_TYPE = '90일 이상' THEN (SELECT DISCOUNT_RATE
+                                                FROM CAR_RENTAL_COMPANY_DISCOUNT_PLAN
+                                                WHERE CAR_TYPE = '트럭'
+                                                AND DURATION_TYPE = '90일 이상')
+                WHEN D_TYPE = '30일 이상' THEN (SELECT DISCOUNT_RATE 
+                                                FROM CAR_RENTAL_COMPANY_DISCOUNT_PLAN
+                                                WHERE CAR_TYPE = '트럭'
+                                                AND DURATION_TYPE = '30일 이상')
+                WHEN D_TYPE = '7일 이상' THEN (SELECT DISCOUNT_RATE
+                                                FROM CAR_RENTAL_COMPANY_DISCOUNT_PLAN
+                                                WHERE CAR_TYPE = '트럭'
+                                                AND DURATION_TYPE = '7일 이상')
                 ELSE 0.00
             END AS DC_RATE
         FROM (
@@ -37,7 +37,7 @@ FROM (
                     WHEN RENTAL_PERIOD >= 30 THEN '30일 이상'
                     WHEN RENTAL_PERIOD >= 7 THEN '7일 이상'
                     ELSE '7일 미만'
-                END AS 구분
+                END AS D_TYPE
             FROM (
                 SELECT
                     A.CAR_ID,
