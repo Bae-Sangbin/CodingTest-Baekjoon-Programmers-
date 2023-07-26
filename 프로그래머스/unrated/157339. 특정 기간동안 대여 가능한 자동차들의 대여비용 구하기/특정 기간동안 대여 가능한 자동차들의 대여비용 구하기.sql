@@ -14,7 +14,6 @@ FROM
             CAR_ID,
             CAR_TYPE,
             DAILY_FEE,
-            RENTAL_PERIOD,
             CASE WHEN CAR_TYPE = '세단' THEN (SELECT DISCOUNT_RATE / 100
                                            FROM CAR_RENTAL_COMPANY_DISCOUNT_PLAN
                                            WHERE CAR_TYPE = '세단'
@@ -26,12 +25,10 @@ FROM
                 ELSE 0.00 END AS DC_RATE
         FROM (
             SELECT 
-                C.CAR_ID, C.CAR_TYPE, C.DAILY_FEE,
-                END_DATE - START_DATE + 1 AS RENTAL_PERIOD
-            FROM CAR_RENTAL_COMPANY_CAR C, CAR_RENTAL_COMPANY_RENTAL_HISTORY H
-            WHERE C.CAR_ID = H.CAR_ID
-            AND C.CAR_TYPE IN ('세단', 'SUV')
-            AND C.CAR_ID NOT IN (SELECT CAR_ID
+                CAR_ID, CAR_TYPE, DAILY_FEE
+            FROM CAR_RENTAL_COMPANY_CAR
+            WHERE CAR_TYPE IN ('세단', 'SUV')
+            AND CAR_ID NOT IN (SELECT CAR_ID
                                 FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
                                 WHERE 
                                     EXTRACT(MONTH FROM START_DATE) = 11
