@@ -1,5 +1,3 @@
--- 코드를 입력하세요
-
 SELECT F.FLAVOR
 FROM ICECREAM_INFO I, 
     (
