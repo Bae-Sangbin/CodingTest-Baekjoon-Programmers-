@@ -1,4 +1,3 @@
--- 코드를 입력하세요
 SELECT
     B.TITLE,
     B.BOARD_ID,
