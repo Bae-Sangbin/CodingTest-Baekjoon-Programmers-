@@ -1,4 +1,3 @@
--- 코드를 입력하세요
 SELECT
     TO_CHAR(SALES_DATE, 'YYYY-MM-DD') AS SALES_DATE,
     PRODUCT_ID,
