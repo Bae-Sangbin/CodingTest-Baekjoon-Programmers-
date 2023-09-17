@@ -1,19 +1,16 @@
-SELECT
-    HOUR,
-    COUNT(ANIMAL_ID) AS COUNT
-FROM(
-        SELECT H.HOUR, A.ANIMAL_ID
-        FROM (
-                SELECT
-                    ROWNUM - 1 AS HOUR
-                FROM ANIMAL_OUTS
-                WHERE ROWNUM <= 24)  H, 
-                (    
-                    SELECT 
-                        ANIMAL_ID,
-                        TO_CHAR(DATETIME, 'HH24') AS HOUR
-                    FROM ANIMAL_OUTS ) A
-        WHERE H.HOUR = A.HOUR(+)
-    )
-GROUP BY HOUR
-ORDER BY HOUR
+-- 코드를 입력하세요
+SELECT A.HOUR, IFNULL(B.CNT, 0) AS COUNT
+FROM (
+    SELECT ROWNUM - 1 AS HOUR
+    FROM (
+        SELECT ROW_NUMBER() OVER(ORDER BY ANIMAL_ID) AS ROWNUM
+        FROM ANIMAL_OUTS
+        ) TBL_1
+    WHERE ROWNUM < 25
+    ) A LEFT JOIN (
+        SELECT HOUR(DATETIME) AS HOUR, COUNT(*) AS CNT
+        FROM ANIMAL_OUTS
+        GROUP BY HOUR(DATETIME)
+    ) B
+ON A.HOUR = B.HOUR
+ORDER BY A.HOUR ASC;
