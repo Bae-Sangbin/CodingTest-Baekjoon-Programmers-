@@ -1,4 +1,3 @@
--- 코드를 입력하세요
 SELECT
     HISTORY_ID, 
     RENTAL_PERIOD * (DAILY_FEE - (DAILY_FEE * DC_RATE/100)) AS FEE
@@ -22,7 +21,7 @@ FROM (
                 WHERE CAR_TYPE = '트럭'
                 AND DURATION_TYPE = '7일 이상'
             )
-            ELSE 0.00
+            ELSE 0
         END AS DC_RATE
     FROM (
         SELECT 
