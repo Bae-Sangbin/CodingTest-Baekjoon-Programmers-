@@ -18,14 +18,15 @@ FROM (
             ) AS DC_RATE
         FROM (
             SELECT 
-                A.CAR_ID,
-                A.CAR_TYPE,
-                A.DAILY_FEE,
-                B.HISTORY_ID
-            FROM CAR_RENTAL_COMPANY_CAR A 
-            JOIN CAR_RENTAL_COMPANY_RENTAL_HISTORY B ON A.CAR_ID = B.CAR_ID
-            WHERE A.CAR_ID NOT IN (
-                SELECT CAR_ID
+                C.CAR_ID,
+                C.CAR_TYPE,
+                C.DAILY_FEE,
+                H.HISTORY_ID
+            FROM CAR_RENTAL_COMPANY_CAR C
+                ,CAR_RENTAL_COMPANY_RENTAL_HISTORY H 
+            WHERE C.CAR_ID = H.CAR_ID
+            AND C.CAR_ID NOT IN (
+                SELECT DISTINCT CAR_ID
                 FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
                 WHERE (
                     (EXTRACT(MONTH FROM START_DATE) <= 10 AND EXTRACT(YEAR FROM END_DATE) > 2022)
@@ -33,7 +34,7 @@ FROM (
                     OR (EXTRACT(MONTH FROM START_DATE) = 11 AND EXTRACT(MONTH FROM END_DATE) = 11)
                 )
             )
-            AND A.CAR_TYPE IN ('SUV', '세단')
+            AND C.CAR_TYPE IN ('SUV', '세단')
         ) TBL_1
     ) TBL_2
 ) TBL_3
