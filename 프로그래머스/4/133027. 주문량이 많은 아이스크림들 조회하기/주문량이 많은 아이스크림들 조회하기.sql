@@ -13,4 +13,5 @@ FROM (
     ) 
     GROUP BY FLAVOR
 )
-WHERE RN <= 3;
+WHERE RN <= 3
+;
